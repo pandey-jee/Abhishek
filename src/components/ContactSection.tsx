@@ -52,16 +52,58 @@ export const ContactSection = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    toast({
-      title: "Message sent!",
-      description: "Thanks for reaching out. I'll get back to you soon!",
-    });
-    
-    setFormData({ name: '', email: '', message: '' });
-    setIsSubmitting(false);
+    try {
+      // Using Web3Forms API with custom email template
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          access_key: '33d592ab-0fdc-43ca-8716-016a70aad5e3',
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          subject: `🚀 New Portfolio Contact from ${formData.name}`,
+          from_name: 'Portfolio Contact Form',
+          replyto: formData.email,
+          // Custom HTML email template
+          template: 'portfolio',
+          custom_fields: {
+            'Sender Name': formData.name,
+            'Sender Email': formData.email,
+            'Message': formData.message,
+            'Submitted At': new Date().toLocaleString('en-US', { 
+              timeZone: 'Asia/Kolkata',
+              dateStyle: 'full',
+              timeStyle: 'short'
+            }),
+            'Source': 'Portfolio Website'
+          }
+        })
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        toast({
+          title: "Message sent!",
+          description: "Thanks for reaching out. I'll get back to you soon!",
+        });
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        throw new Error('Failed to send message');
+      }
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to send message. Please try emailing directly or contact via WhatsApp.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (

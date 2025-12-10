@@ -10,13 +10,13 @@ const achievements = [
   {
     icon: Award,
     title: 'Competitive Coder',
-    description: 'CodeChef 3★ (Rating: 1657), Codeforces Pupil, 300+ problems solved',
+    description: 'CodeChef 3★ (Rating: 1657), Codeforces Pupil, 500+ problems solved',
     color: 'from-primary to-secondary',
   },
   {
     icon: Users,
     title: 'Event Coordinator',
-    description: 'Organized 5 university events with 200+ participants',
+    description: 'Organized 10+ university events with 1000+ participants',
     color: 'from-secondary to-accent',
   },
   {
