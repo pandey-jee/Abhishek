@@ -13,15 +13,9 @@ const contactInfo = [
     href: 'mailto:pandeyji252002@gmail.com',
   },
   {
-    icon: Phone,
-    label: 'Phone',
-    value: '+91 90316 98085',
-    href: 'tel:+919031698085',
-  },
-  {
     icon: MapPin,
     label: 'Location',
-    value: 'India',
+    value: 'Chandigarh, India',
     href: null,
   },
 ];

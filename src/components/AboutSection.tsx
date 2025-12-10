@@ -67,15 +67,16 @@ export const AboutSection = () => {
                 <p className="reveal-text">
                   I'm a <span className="text-foreground font-medium">Software Engineer</span> and 
                   final-year <span className="text-foreground font-medium">B.E. Computer Science</span> student 
-                  at Chandigarh University (CGPA: 7.4).
+                  at Chandigarh University with a CGPA of 7.4.
                 </p>
                 <p className="reveal-text">
-                  I specialize in <span className="text-primary font-semibold">MERN stack development</span>, building 
+                  Currently working as a <span className="text-primary font-semibold">Software Engineer at SS Cleaners</span>, 
+                  where I specialize in <span className="text-primary font-semibold">MERN stack development</span>, building 
                   scalable applications with React, Node.js, and MongoDB. My passion lies in creating 
                   seamless user experiences and solving complex problems through code.
                 </p>
                 <p className="reveal-text">
-                  Currently working on <span className="text-primary font-semibold">AI-powered platforms</span> and
+                  I focus on developing <span className="text-primary font-semibold">AI-powered platforms</span> and
                   <span className="text-primary font-semibold"> IoT integrations</span>, pushing the boundaries of 
                   what's possible with modern web technologies.
                 </p>
@@ -99,15 +100,29 @@ export const AboutSection = () => {
                 </div>
                 <h4 className="font-semibold">Education</h4>
               </div>
-              <div className="flex justify-between items-start p-3 rounded-lg bg-muted/30 group-hover:bg-muted/50 transition-colors">
-                <div>
-                  <p className="font-medium flex items-center gap-2">
-                    <ChevronRight className="h-4 w-4 text-primary" />
-                    B.E. Computer Science
-                  </p>
-                  <p className="text-sm text-muted-foreground ml-6">Chandigarh University</p>
+              <div className="space-y-3">
+                <div className="flex justify-between items-start p-3 rounded-lg bg-muted/30 group-hover:bg-muted/50 transition-colors">
+                  <div>
+                    <p className="font-medium flex items-center gap-2">
+                      <ChevronRight className="h-4 w-4 text-primary" />
+                      B.E. Computer Science Engineering
+                    </p>
+                    <p className="text-sm text-muted-foreground ml-6">Chandigarh University, Chandigarh</p>
+                    <p className="text-sm text-primary font-mono ml-6">CGPA: 7.4</p>
+                  </div>
+                  <span className="text-sm text-primary font-mono bg-primary/10 px-2 py-1 rounded">2022 - 2026</span>
                 </div>
-                <span className="text-sm text-primary font-mono bg-primary/10 px-2 py-1 rounded">2022 - 2026</span>
+                <div className="flex justify-between items-start p-3 rounded-lg bg-muted/30 group-hover:bg-muted/50 transition-colors">
+                  <div>
+                    <p className="font-medium flex items-center gap-2">
+                      <ChevronRight className="h-4 w-4 text-primary" />
+                      12th Grade (PCM)
+                    </p>
+                    <p className="text-sm text-muted-foreground ml-6">CBSE Board</p>
+                    <p className="text-sm text-primary font-mono ml-6">Percentage: 85%</p>
+                  </div>
+                  <span className="text-sm text-primary font-mono bg-primary/10 px-2 py-1 rounded">2021</span>
+                </div>
               </div>
             </div>
           </div>
