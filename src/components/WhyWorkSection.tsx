@@ -1,10 +1,5 @@
-import { useEffect, useRef } from 'react';
 import { Clock, MessageSquare, Target, TrendingUp, Shield, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
 
 const reasons = [
   {
@@ -52,78 +47,8 @@ const reasons = [
 ];
 
 export const WhyWorkSection = () => {
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Header animation with ultra-smooth scroll
-      gsap.fromTo('.whywork-header',
-        { opacity: 0, y: 100 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1.5,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: '.whywork-header',
-            start: 'top 90%',
-            end: 'top 50%',
-            scrub: 2,
-            toggleActions: 'play none none reverse'
-          }
-        }
-      );
-
-      // Reason cards with buttery smooth scroll and stagger
-      gsap.fromTo('.reason-card',
-        { opacity: 0, y: 120, scale: 0.9 },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 1.5,
-          stagger: {
-            amount: 0.8,
-            from: 'start',
-            ease: 'sine.inOut'
-          },
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: '.reasons-grid',
-            start: 'top 85%',
-            end: 'top 30%',
-            scrub: 2.5,
-            toggleActions: 'play none none reverse'
-          }
-        }
-      );
-
-      // CTA Section with ultra-smooth scroll
-      gsap.fromTo('.why-cta',
-        { opacity: 0, y: 100, scale: 0.9 },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 1.5,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: '.why-cta',
-            start: 'top 85%',
-            end: 'top 40%',
-            scrub: 2,
-            toggleActions: 'play none none reverse'
-          }
-        }
-      );
-
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
-
   return (
-    <section id="why-work" ref={sectionRef} className="py-24 relative overflow-hidden">
+    <section id="why-work" className="py-24 relative overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_hsl(250_60%_60%_/_0.05)_0%,_transparent_70%)]" />
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-[120px] animate-pulse" />
@@ -131,7 +56,7 @@ export const WhyWorkSection = () => {
 
       <div className="section-container relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-16 why-header">
+        <div className="text-center mb-16 why-header animate-fade-in" style={{ animationDelay: '0.3s', animationFillMode: 'both' }}>
           <p className="text-primary font-mono text-sm mb-2">{'<WhyWorkWithMe />'}</p>
           <h2 className="text-3xl md:text-5xl font-bold mb-4">
             Why Choose <span className="gradient-text">Me</span>
@@ -147,7 +72,8 @@ export const WhyWorkSection = () => {
           {reasons.map((reason, index) => (
             <div
               key={index}
-              className="reason-card group glass-card-hover p-6 border border-border/50 hover:border-primary/30 transition-all duration-300 relative overflow-hidden"
+              className="reason-card group glass-card-hover p-6 border border-border/50 hover:border-primary/30 transition-all duration-300 relative overflow-hidden animate-fade-in"
+              style={{ animationDelay: `${0.5 + index * 0.15}s`, animationFillMode: 'both' }}
             >
               {/* Background Gradient on Hover */}
               <div className={`absolute inset-0 bg-gradient-to-br ${reason.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300`} />
@@ -181,7 +107,7 @@ export const WhyWorkSection = () => {
         </div>
 
         {/* CTA Section */}
-        <div className="why-cta glass-card p-8 md:p-12 text-center border border-primary/20 relative overflow-hidden">
+        <div className="why-cta glass-card p-8 md:p-12 text-center border border-primary/20 relative overflow-hidden animate-fade-in" style={{ animationDelay: '1.5s', animationFillMode: 'both' }}>
           {/* Background Effect */}
           <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5" />
           

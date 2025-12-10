@@ -1,9 +1,4 @@
-import { useEffect, useRef } from 'react';
 import { GraduationCap, Award, Trophy, Users, User, ChevronRight } from 'lucide-react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
 
 const achievements = [
   {
@@ -33,96 +28,8 @@ const achievements = [
 ];
 
 export const AboutSection = () => {
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Header animation with ultra-smooth scroll
-      gsap.fromTo('.about-header',
-        { opacity: 0, y: 100 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1.5,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: '.about-header',
-            start: 'top 90%',
-            end: 'top 50%',
-            scrub: 2,
-            toggleActions: 'play none none reverse'
-          }
-        }
-      );
-
-      // Bio card with ultra-smooth scroll sync
-      gsap.fromTo('.bio-card',
-        { opacity: 0, x: -120 },
-        {
-          opacity: 1,
-          x: 0,
-          duration: 1.5,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: '.about-content',
-            start: 'top 85%',
-            end: 'top 40%',
-            scrub: 2.5,
-            toggleActions: 'play none none reverse'
-          }
-        }
-      );
-
-      // Achievement cards with buttery smooth stagger
-      gsap.fromTo('.achievement-card',
-        { opacity: 0, y: 120, scale: 0.9 },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 1.5,
-          stagger: {
-            amount: 0.6,
-            from: 'start',
-            ease: 'sine.inOut'
-          },
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: '.achievements-grid',
-            start: 'top 85%',
-            end: 'top 30%',
-            scrub: 2.5,
-            toggleActions: 'play none none reverse'
-          }
-        }
-      );
-
-      // Text reveal animation
-      gsap.fromTo('.reveal-text',
-        { opacity: 0, y: 20 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          stagger: 0.1,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: '.bio-content',
-            start: 'top 80%',
-            end: 'top 60%',
-            scrub: 0.5,
-            toggleActions: 'play none none reverse'
-          }
-        }
-      );
-
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
-
   return (
-    <section ref={sectionRef} id="about" className="py-24 relative">
+    <section id="about" className="py-24 relative">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_hsl(173_80%_50%_/_0.05)_0%,_transparent_70%)]" />
       
       {/* Decorative elements */}
@@ -131,7 +38,7 @@ export const AboutSection = () => {
       
       <div className="section-container relative z-10">
         {/* Section Header */}
-        <div className="about-header text-center mb-16">
+        <div className="about-header text-center mb-16 animate-fade-in" style={{ animationDelay: '0.3s', animationFillMode: 'both' }}>
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 bg-primary/5 backdrop-blur-sm mb-4">
             <User className="h-4 w-4 text-primary" />
             <span className="text-primary font-mono text-sm">{'whoami'}</span>
@@ -144,7 +51,7 @@ export const AboutSection = () => {
         <div className="about-content grid lg:grid-cols-2 gap-12 items-start">
           {/* Bio */}
           <div className="space-y-6">
-            <div className="bio-card glass-card p-8 relative overflow-hidden">
+            <div className="bio-card glass-card p-8 relative overflow-hidden animate-fade-in" style={{ animationDelay: '0.5s', animationFillMode: 'both' }}>
               {/* Terminal header */}
               <div className="flex items-center gap-2 mb-6 pb-4 border-b border-border/50">
                 <div className="w-3 h-3 rounded-full bg-red-500" />
@@ -185,7 +92,7 @@ export const AboutSection = () => {
             </div>
 
             {/* Education */}
-            <div className="bio-card glass-card p-6 group">
+            <div className="bio-card glass-card p-6 group animate-fade-in" style={{ animationDelay: '0.7s', animationFillMode: 'both' }}>
               <div className="flex items-center gap-3 mb-4">
                 <div className="p-2 rounded-lg bg-gradient-to-br from-primary to-secondary">
                   <GraduationCap className="h-5 w-5 text-white" />
@@ -210,8 +117,8 @@ export const AboutSection = () => {
             {achievements.map((item, index) => (
               <div 
                 key={item.title}
-                className="achievement-card glass-card p-6 flex gap-4 group relative overflow-hidden"
-                style={{ perspective: '1000px' }}
+                className="achievement-card glass-card p-6 flex gap-4 group relative overflow-hidden animate-fade-in"
+                style={{ perspective: '1000px', animationDelay: `${0.9 + index * 0.15}s`, animationFillMode: 'both' }}
               >
                 {/* Gradient line on left */}
                 <div className={`absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b ${item.color} opacity-50 group-hover:opacity-100 transition-opacity`} />

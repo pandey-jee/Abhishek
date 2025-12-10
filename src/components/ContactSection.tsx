@@ -1,13 +1,9 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import { Mail, Phone, MapPin, Send, Github, Linkedin, ExternalLink, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
 
 const contactInfo = [
   {
@@ -45,57 +41,12 @@ const socialLinks = [
 
 export const ContactSection = () => {
   const { toast } = useToast();
-  const sectionRef = useRef<HTMLElement>(null);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     message: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Header animation with ultra-smooth scroll
-      gsap.fromTo('.contact-header',
-        { opacity: 0, y: 100 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1.5,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: '.contact-header',
-            start: 'top 90%',
-            end: 'top 50%',
-            scrub: 2,
-            toggleActions: 'play none none reverse'
-          }
-        }
-      );
-
-      // Content sections with ultra-smooth scroll
-      gsap.fromTo('.contact-info, .contact-form',
-        { opacity: 0, y: 120, scale: 0.9 },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 1.5,
-          stagger: 0.3,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: '.contact-content',
-            start: 'top 85%',
-            end: 'top 35%',
-            scrub: 2.5,
-            toggleActions: 'play none none reverse'
-          }
-        }
-      );
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -114,12 +65,12 @@ export const ContactSection = () => {
   };
 
   return (
-    <section ref={sectionRef} id="contact" className="py-24 relative overflow-hidden">
+    <section id="contact" className="py-24 relative overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_hsl(173_80%_50%_/_0.05)_0%,_transparent_70%)]" />
       
       <div className="section-container relative z-10">
         {/* Section Header */}
-        <div className="contact-header text-center mb-16">{/*  */}
+        <div className="contact-header text-center mb-16 animate-fade-in" style={{ animationDelay: '0.3s', animationFillMode: 'both' }}>{/*  */}
           <p className="text-primary font-mono text-sm mb-2">{'<Contact />'}</p>
           <h2 className="text-3xl md:text-5xl font-bold mb-4">
             Let's <span className="gradient-text">Connect</span>
@@ -132,7 +83,7 @@ export const ContactSection = () => {
 
         <div className="contact-content grid lg:grid-cols-2 gap-12">
           {/* Contact Info */}
-          <div className="contact-info space-y-6">
+          <div className="contact-info space-y-6 animate-fade-in" style={{ animationDelay: '0.5s', animationFillMode: 'both' }}>
             {/* WhatsApp CTA - Featured */}
             <div className="glass-card p-6 border-2 border-primary/30 relative overflow-hidden group hover:border-primary/50 transition-colors">
               <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -210,7 +161,7 @@ export const ContactSection = () => {
           </div>
 
           {/* Contact Form */}
-          <div className="contact-form glass-card p-8">
+          <div className="contact-form glass-card p-8 animate-fade-in" style={{ animationDelay: '0.7s', animationFillMode: 'both' }}>
             <h3 className="text-xl font-semibold mb-6">Send a Message</h3>
             <form onSubmit={handleSubmit} className="space-y-5">
               <div>

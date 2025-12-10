@@ -1,11 +1,6 @@
-import { useEffect, useRef } from 'react';
 import { ExternalLink, Github, ArrowRight, Code2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
 
 const projects = [
   {
@@ -41,65 +36,14 @@ const projects = [
 ];
 
 export const ProjectsSection = () => {
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Header animation with ultra-smooth scroll
-      gsap.fromTo('.projects-header',
-        { opacity: 0, y: 100 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1.5,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: '.projects-header',
-            start: 'top 90%',
-            end: 'top 50%',
-            scrub: 2,
-            toggleActions: 'play none none reverse'
-          }
-        }
-      );
-
-      // Project cards with buttery smooth stagger and scroll sync
-      gsap.fromTo('.project-card',
-        { opacity: 0, y: 120, scale: 0.9 },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 1.5,
-          stagger: {
-            amount: 0.6,
-            from: 'start',
-            ease: 'sine.inOut'
-          },
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: '.projects-grid',
-            start: 'top 85%',
-            end: 'top 30%',
-            scrub: 2.5,
-            toggleActions: 'play none none reverse'
-          }
-        }
-      );
-
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
-
   return (
-    <section ref={sectionRef} id="projects" className="py-24 relative overflow-hidden">
+    <section id="projects" className="py-24 relative overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_hsl(173_80%_50%_/_0.05)_0%,_transparent_70%)]" />
       
       <div className="section-container relative z-10">
         {/* Section Header */}
-        <div className="projects-header text-center mb-16">
+        <div className="projects-header text-center mb-16 animate-fade-in" style={{ animationDelay: '0.3s', animationFillMode: 'both' }}>
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 bg-primary/5 backdrop-blur-sm mb-4">
             <Code2 className="h-4 w-4 text-primary" />
             <span className="text-primary font-mono text-sm">{'projects.map()'}</span>
@@ -115,10 +59,11 @@ export const ProjectsSection = () => {
 
         {/* Projects Grid - All Cards Same Size */}
         <div className="projects-grid grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((project) => (
+          {projects.map((project, index) => (
             <div 
               key={project.title}
-              className="project-card glass-card overflow-hidden group relative border border-border/50"
+              className="project-card glass-card overflow-hidden group relative border border-border/50 animate-fade-in"
+              style={{ animationDelay: `${0.5 + index * 0.15}s`, animationFillMode: 'both' }}
             >
               {/* Animated Neon Border Glow */}
               <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">

@@ -1,10 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { Download, FileText, CheckCircle, Award, Briefcase, ExternalLink, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
 
 const highlights = [
   {
@@ -26,116 +22,7 @@ const highlights = [
 ];
 
 export const ResumeSection = () => {
-  const sectionRef = useRef<HTMLElement>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Main card with ultra-smooth scroll sync
-      gsap.fromTo('.resume-card',
-        { 
-          opacity: 0, 
-          y: 120,
-          scale: 0.9
-        },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 1.5,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: '.resume-card',
-            start: 'top 90%',
-            end: 'top 40%',
-            scrub: 2,
-            toggleActions: 'play none none reverse'
-          }
-        }
-      );
-
-      // Highlights with ultra-smooth stagger
-      gsap.fromTo('.highlight-item',
-        { 
-          opacity: 0, 
-          x: -60,
-          scale: 0.9
-        },
-        {
-          opacity: 1,
-          x: 0,
-          scale: 1,
-          duration: 1.2,
-          stagger: {
-            amount: 0.4,
-            from: 'start',
-            ease: 'sine.inOut'
-          },
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: '.highlights-container',
-            start: 'top 85%',
-            end: 'top 50%',
-            scrub: 1.5,
-            toggleActions: 'play none none reverse'
-          }
-        }
-      );
-
-      // Button animations
-      gsap.fromTo('.resume-download-btn',
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: '.resume-download-btn',
-            start: 'top 90%',
-            end: 'top 65%',
-            scrub: 1.5,
-            toggleActions: 'play none none reverse'
-          }
-        }
-      );
-
-      // Document preview animation
-      gsap.fromTo('.resume-preview',
-        { 
-          opacity: 0, 
-          x: 60,
-          rotateY: -15
-        },
-        {
-          opacity: 1,
-          x: 0,
-          rotateY: 0,
-          duration: 1.5,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: '.resume-preview',
-            start: 'top 85%',
-            end: 'top 45%',
-            scrub: 2,
-            toggleActions: 'play none none reverse'
-          }
-        }
-      );
-
-      // Button pulse animation
-      gsap.to('.resume-download-btn', {
-        boxShadow: '0 0 30px hsl(173 80% 50% / 0.4)',
-        duration: 1.5,
-        repeat: -1,
-        yoyo: true,
-        ease: 'sine.inOut'
-      });
-
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
 
   const handleDownload = () => {
     // Download from public folder
@@ -400,13 +287,13 @@ export const ResumeSection = () => {
         </div>
       )}
 
-    <section id="resume" ref={sectionRef} className="py-16 relative overflow-hidden">
+    <section id="resume" className="py-16 relative overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_hsl(173_80%_50%_/_0.08)_0%,_transparent_60%)]" />
       <div className="absolute top-0 right-0 w-72 h-72 bg-primary/10 rounded-full blur-[100px]" />
 
       <div className="section-container relative z-10">
-        <div className="resume-card max-w-4xl mx-auto glass-card p-8 md:p-12 border border-primary/20 relative overflow-hidden">
+        <div className="resume-card max-w-4xl mx-auto glass-card p-8 md:p-12 border border-primary/20 relative overflow-hidden animate-fade-in" style={{ animationDelay: '0.3s', animationFillMode: 'both' }}>
           {/* Background Gradient */}
           <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5" />
           
@@ -433,7 +320,8 @@ export const ResumeSection = () => {
                   {highlights.map((item, index) => (
                     <div
                       key={index}
-                      className="highlight-item flex items-center gap-3 p-3 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors"
+                      className="highlight-item flex items-center gap-3 p-3 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors animate-fade-in"
+                      style={{ animationDelay: `${0.5 + index * 0.1}s`, animationFillMode: 'both' }}
                     >
                       <div className="p-2 rounded-lg bg-primary/10">
                         <item.icon className="h-4 w-4 text-primary" />
@@ -448,7 +336,8 @@ export const ResumeSection = () => {
                   <Button
                     size="lg"
                     onClick={handleDownload}
-                    className="resume-download-btn glow-button w-full md:w-auto px-8 gap-2"
+                    className="resume-download-btn glow-button w-full md:w-auto px-8 gap-2 animate-scale-in"
+                    style={{ animationDelay: '1s', animationFillMode: 'both' }}
                   >
                     <Download className="h-5 w-5" />
                     Download Resume
@@ -467,7 +356,7 @@ export const ResumeSection = () => {
               </div>
 
               {/* Right Side - HTML Resume Preview */}
-              <div className="resume-preview relative cursor-pointer" onClick={openModal}>
+              <div className="resume-preview relative cursor-pointer animate-fade-in" onClick={openModal} style={{ animationDelay: '1.2s', animationFillMode: 'both' }}>
                 <div className="aspect-[3/4] rounded-2xl border-2 border-primary/30 bg-background relative overflow-hidden group hover:border-primary/50 transition-all duration-300 shadow-2xl hover:shadow-primary/20 hover:scale-[1.02]">
                   {/* Actual HTML Resume Preview */}
                   <div className="absolute inset-0 overflow-y-auto custom-scrollbar p-6 text-xs pointer-events-none">
