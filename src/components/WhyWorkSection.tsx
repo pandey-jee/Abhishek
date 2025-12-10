@@ -79,13 +79,10 @@ export const WhyWorkSection = () => {
               <div className={`absolute inset-0 bg-gradient-to-br ${reason.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300`} />
 
               <div className="relative z-10">
-                {/* Icon & Stat */}
-                <div className="flex items-start justify-between mb-4">
-                  <div className={`p-3 rounded-xl bg-gradient-to-br ${reason.color} shadow-lg`}>
+                {/* Icon */}
+                <div className="mb-4">
+                  <div className={`p-3 rounded-xl bg-gradient-to-br ${reason.color} shadow-lg inline-block`}>
                     <reason.icon className="h-6 w-6 text-white" />
-                  </div>
-                  <div className="stat-badge px-3 py-1 rounded-full bg-primary/10 border border-primary/20">
-                    <span className="text-xs font-semibold text-primary">{reason.stat}</span>
                   </div>
                 </div>
 

@@ -1,4 +1,25 @@
 import { Code2, Server, Database, Wrench, Brain, Palette, Cpu } from 'lucide-react';
+import { motion } from 'framer-motion';
+
+const fadeInUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: [0.22, 0.9, 0.3, 1] }
+  }
+};
+
+const staggerContainer = {
+  hidden: { opacity: 1 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2
+    }
+  }
+};
 
 const skillCategories = [
   {
@@ -56,7 +77,13 @@ export const SkillsSection = () => {
       
       <div className="section-container relative z-10">
         {/* Section Header */}
-        <div className="skills-header text-center mb-16 animate-fade-in" style={{ animationDelay: '0.3s', animationFillMode: 'both' }}>
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={fadeInUp}
+          className="skills-header text-center mb-16"
+        >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-secondary/30 bg-secondary/5 backdrop-blur-sm mb-4">
             <Cpu className="h-4 w-4 text-secondary" />
             <span className="text-secondary font-mono text-sm">{'skills.forEach()'}</span>
@@ -68,15 +95,23 @@ export const SkillsSection = () => {
             A comprehensive toolkit built through hands-on experience with modern web technologies
             and competitive programming.
           </p>
-        </div>
+        </motion.div>
 
         {/* Skills Grid */}
-        <div className="skills-grid grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={staggerContainer}
+          className="skills-grid grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
           {skillCategories.map((category, index) => (
-            <div 
+            <motion.div 
               key={category.title}
-              className="skill-card glass-card p-6 group relative overflow-hidden border border-border/50 hover:border-primary/30 transition-all duration-300 animate-fade-in"
-              style={{ animationDelay: `${0.5 + index * 0.15}s`, animationFillMode: 'both' }}
+              variants={fadeInUp}
+              whileHover={{ y: -5, scale: 1.02 }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              className="skill-card glass-card p-6 group relative overflow-hidden border border-border/50 hover:border-primary/30 transition-all duration-300"
             >
               <div className="flex items-center gap-3 mb-4">
                 <div className={`p-2.5 rounded-xl bg-gradient-to-br ${category.color} shadow-lg transition-transform duration-300 group-hover:scale-110`}>
@@ -95,20 +130,35 @@ export const SkillsSection = () => {
                   </span>
                 ))}
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* Languages Bar - Simplified */}
-        <div className="languages-bar mt-16 glass-card p-8 border border-border/50">
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={fadeInUp}
+          className="languages-bar mt-16 glass-card p-8 border border-border/50"
+        >
           <h3 className="text-xl font-semibold mb-8 text-center">
             <span className="font-mono text-primary">&lt;</span>
             Programming Languages
             <span className="font-mono text-primary">/&gt;</span>
           </h3>
-          <div className="flex flex-wrap justify-center gap-6 md:gap-8">
+          <motion.div 
+            variants={staggerContainer}
+            className="flex flex-wrap justify-center gap-6 md:gap-8"
+          >
             {languages.map((lang, index) => (
-              <div key={lang.name} className="lang-item text-center group cursor-default animate-scale-in" style={{ animationDelay: `${1.5 + index * 0.1}s`, animationFillMode: 'both' }}>
+              <motion.div 
+                key={lang.name} 
+                variants={fadeInUp}
+                whileHover={{ scale: 1.15, rotate: 5 }}
+                whileTap={{ scale: 0.95 }}
+                className="lang-item text-center group cursor-pointer"
+              >
                 <div className={`w-16 h-16 md:w-20 md:h-20 rounded-xl bg-gradient-to-br ${lang.color} flex items-center justify-center mb-2 group-hover:scale-110 transition-all duration-300 shadow-lg group-hover:shadow-xl relative overflow-hidden`}>
                   <span className="font-mono text-lg md:text-xl font-bold text-white relative z-10">
                     {lang.abbr}
@@ -117,10 +167,10 @@ export const SkillsSection = () => {
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
                 </div>
                 <p className="text-xs md:text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-300">{lang.name}</p>
-              </div>
+              </motion.div>
             ))}
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );

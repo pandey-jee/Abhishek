@@ -1,6 +1,27 @@
 import { ExternalLink, Github, ArrowRight, Code2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { motion } from 'framer-motion';
+
+const fadeInUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: [0.22, 0.9, 0.3, 1] }
+  }
+};
+
+const staggerContainer = {
+  hidden: { opacity: 1 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.2
+    }
+  }
+};
 
 const projects = [
   {
@@ -43,7 +64,13 @@ export const ProjectsSection = () => {
       
       <div className="section-container relative z-10">
         {/* Section Header */}
-        <div className="projects-header text-center mb-16 animate-fade-in" style={{ animationDelay: '0.3s', animationFillMode: 'both' }}>
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={fadeInUp}
+          className="projects-header text-center mb-16"
+        >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 bg-primary/5 backdrop-blur-sm mb-4">
             <Code2 className="h-4 w-4 text-primary" />
             <span className="text-primary font-mono text-sm">{'projects.map()'}</span>
@@ -55,15 +82,23 @@ export const ProjectsSection = () => {
             Here are some projects I've built that showcase my skills in full-stack development, 
             AI integration, and creating impactful user experiences.
           </p>
-        </div>
+        </motion.div>
 
         {/* Projects Grid - All Cards Same Size */}
-        <div className="projects-grid grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={staggerContainer}
+          className="projects-grid grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
           {projects.map((project, index) => (
-            <div 
+            <motion.div 
               key={project.title}
-              className="project-card glass-card overflow-hidden group relative border border-border/50 animate-fade-in"
-              style={{ animationDelay: `${0.5 + index * 0.15}s`, animationFillMode: 'both' }}
+              variants={fadeInUp}
+              whileHover={{ y: -5, scale: 1.01 }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              className="project-card glass-card overflow-hidden group relative border border-border/50"
             >
               {/* Animated Neon Border Glow */}
               <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
@@ -135,9 +170,9 @@ export const ProjectsSection = () => {
                   </Button>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* View More */}
         <div className="text-center mt-12">

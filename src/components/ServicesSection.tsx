@@ -1,4 +1,25 @@
 import { Code2, Smartphone, Database, Rocket, Zap, Layout, Globe } from 'lucide-react';
+import { motion } from 'framer-motion';
+
+const fadeInUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: [0.22, 0.9, 0.3, 1] }
+  }
+};
+
+const staggerContainer = {
+  hidden: { opacity: 1 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: 0.2
+    }
+  }
+};
 
 const services = [
   {
@@ -55,7 +76,13 @@ export const ServicesSection = () => {
 
       <div className="section-container relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-16 services-header animate-fade-in" style={{ animationDelay: '0.3s', animationFillMode: 'both' }}>
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={fadeInUp}
+          className="text-center mb-16 services-header"
+        >
           <p className="text-primary font-mono text-sm mb-2">{'<Services />'}</p>
           <h2 className="text-3xl md:text-5xl font-bold mb-4">
             What I <span className="gradient-text">Offer</span>
@@ -64,15 +91,23 @@ export const ServicesSection = () => {
             Comprehensive web development services to bring your ideas to life. 
             From concept to deployment, I've got you covered.
           </p>
-        </div>
+        </motion.div>
 
         {/* Services Grid */}
-        <div className="services-grid grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={staggerContainer}
+          className="services-grid grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
           {services.map((service, index) => (
-            <div
+            <motion.div
               key={index}
-              className="service-card group glass-card-hover p-6 border border-border/50 hover:border-primary/30 transition-all duration-300 animate-fade-in"
-              style={{ animationDelay: `${0.5 + index * 0.15}s`, animationFillMode: 'both' }}
+              variants={fadeInUp}
+              whileHover={{ y: -8, scale: 1.02 }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              className="service-card group glass-card-hover p-6 border border-border/50 hover:border-primary/30 transition-all duration-300"
             >
               {/* Icon */}
               <div className={`service-icon inline-flex p-4 rounded-xl bg-gradient-to-br ${service.color} mb-4`}>
@@ -101,9 +136,9 @@ export const ServicesSection = () => {
 
               {/* Hover Gradient Line */}
               <div className="mt-6 h-1 w-0 group-hover:w-full bg-gradient-to-r from-primary to-secondary transition-all duration-500 rounded-full" />
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* CTA */}
         <div className="text-center mt-12">
