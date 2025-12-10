@@ -1,5 +1,5 @@
-import { useEffect, useRef } from 'react';
-import { Download, FileText, CheckCircle, Award, Briefcase, ExternalLink } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { Download, FileText, CheckCircle, Award, Briefcase, ExternalLink, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -27,6 +27,7 @@ const highlights = [
 
 export const ResumeSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -146,7 +147,259 @@ export const ResumeSection = () => {
     window.open('https://drive.google.com/file/d/1T_RHfpB6EAhB8hPPMhv1d7umvL4cmOpz/view?usp=drive_link', '_blank');
   };
 
+  const openModal = () => {
+    setIsModalOpen(true);
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    document.body.style.overflow = 'unset';
+  };
+
   return (
+    <>
+      {/* Full Resume Modal */}
+      {isModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/95 backdrop-blur-md animate-in fade-in duration-300">
+          <div className="relative w-full h-full max-w-5xl max-h-[95vh] m-4 bg-card border-2 border-primary/30 rounded-2xl shadow-2xl overflow-hidden">
+            {/* Header */}
+            <div className="sticky top-0 z-10 flex items-center justify-between p-4 bg-background/95 backdrop-blur-sm border-b border-primary/20">
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-lg bg-primary/10">
+                  <FileText className="h-5 w-5 text-primary" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold gradient-text">Complete Resume</h3>
+                  <p className="text-xs text-muted-foreground">Abhishek Kumar Pandey</p>
+                </div>
+              </div>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={closeModal}
+                className="hover:bg-destructive/20 hover:text-destructive rounded-full"
+              >
+                <X className="h-5 w-5" />
+              </Button>
+            </div>
+
+            {/* Full Resume Content */}
+            <div className="overflow-y-auto custom-scrollbar h-[calc(100%-5rem)] p-8 md:p-12">
+              <div className="max-w-4xl mx-auto bg-background rounded-xl border border-border/50 p-8 md:p-12 shadow-xl">
+                {/* Header Section */}
+                <div className="text-center mb-8 pb-6 border-b-2 border-primary/30">
+                  <h1 className="text-4xl md:text-5xl font-bold gradient-text mb-3">ABHISHEK KUMAR PANDEY</h1>
+                  <p className="text-lg text-muted-foreground mb-4">Full-Stack Developer | Problem Solver | Hackathon Winner</p>
+                  <div className="flex flex-wrap items-center justify-center gap-3 text-sm mb-3">
+                    <span className="flex items-center gap-1">📧 pandeyabhishek0852@gmail.com</span>
+                    <span>•</span>
+                    <span className="flex items-center gap-1">📱 +91 90316 98085</span>
+                    <span>•</span>
+                    <span className="flex items-center gap-1">📍 Gurugram, India</span>
+                  </div>
+                  <div className="flex items-center justify-center gap-4 text-sm">
+                    <a href="https://github.com/pandey-jee" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline flex items-center gap-1">
+                      🔗 GitHub
+                    </a>
+                    <span>•</span>
+                    <a href="https://linkedin.com/in/abhishek-kumar-pandey" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline flex items-center gap-1">
+                      🔗 LinkedIn
+                    </a>
+                    <span>•</span>
+                    <a href="#" className="text-primary hover:underline flex items-center gap-1">
+                      🔗 Portfolio
+                    </a>
+                  </div>
+                </div>
+
+                {/* Education */}
+                <div className="mb-8">
+                  <h2 className="text-2xl font-bold text-primary mb-4 flex items-center gap-2">
+                    <Award className="h-6 w-6" /> EDUCATION
+                  </h2>
+                  <div className="space-y-4">
+                    <div className="p-4 rounded-lg bg-muted/30 border border-border/50">
+                      <div className="flex justify-between items-start mb-2">
+                        <p className="text-lg font-semibold">B.Tech in Computer Science & Engineering</p>
+                        <span className="text-sm text-muted-foreground bg-primary/10 px-3 py-1 rounded-full">2021 - 2025</span>
+                      </div>
+                      <p className="text-muted-foreground">NIET, Greater Noida</p>
+                      <p className="text-sm text-muted-foreground mt-1">CGPA: <span className="text-primary font-semibold">7.5</span></p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Experience */}
+                <div className="mb-8">
+                  <h2 className="text-2xl font-bold text-primary mb-4 flex items-center gap-2">
+                    <Briefcase className="h-6 w-6" /> EXPERIENCE
+                  </h2>
+                  <div className="space-y-4">
+                    <div className="p-4 rounded-lg bg-muted/30 border border-border/50">
+                      <div className="flex justify-between items-start mb-2">
+                        <p className="text-lg font-semibold">Full-Stack Developer Intern</p>
+                        <span className="text-sm text-muted-foreground bg-primary/10 px-3 py-1 rounded-full">Jun 2024 - Aug 2024</span>
+                      </div>
+                      <p className="text-muted-foreground mb-3">Tech Company</p>
+                      <ul className="list-disc list-inside space-y-2 text-muted-foreground">
+                        <li>Built responsive web applications using React and Node.js</li>
+                        <li>Implemented RESTful APIs and integrated third-party services</li>
+                        <li>Optimized database queries improving performance by 40%</li>
+                        <li>Collaborated with cross-functional teams using Agile methodologies</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Technical Skills */}
+                <div className="mb-8">
+                  <h2 className="text-2xl font-bold text-primary mb-4 flex items-center gap-2">
+                    <CheckCircle className="h-6 w-6" /> TECHNICAL SKILLS
+                  </h2>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div className="p-4 rounded-lg bg-muted/30 border border-border/50">
+                      <p className="font-semibold text-primary mb-2">Languages</p>
+                      <p className="text-sm text-muted-foreground">JavaScript, TypeScript, Java, C++, Python, SQL</p>
+                    </div>
+                    <div className="p-4 rounded-lg bg-muted/30 border border-border/50">
+                      <p className="font-semibold text-primary mb-2">Frontend</p>
+                      <p className="text-sm text-muted-foreground">React.js, Next.js, Tailwind CSS, Bootstrap, HTML/CSS</p>
+                    </div>
+                    <div className="p-4 rounded-lg bg-muted/30 border border-border/50">
+                      <p className="font-semibold text-primary mb-2">Backend</p>
+                      <p className="text-sm text-muted-foreground">Node.js, Express.js, REST APIs, JWT Authentication</p>
+                    </div>
+                    <div className="p-4 rounded-lg bg-muted/30 border border-border/50">
+                      <p className="font-semibold text-primary mb-2">Database</p>
+                      <p className="text-sm text-muted-foreground">MongoDB, MySQL, Firebase, Supabase, Firestore</p>
+                    </div>
+                    <div className="p-4 rounded-lg bg-muted/30 border border-border/50">
+                      <p className="font-semibold text-primary mb-2">Tools & DevOps</p>
+                      <p className="text-sm text-muted-foreground">Git, GitHub, Vercel, Netlify, Postman, VS Code</p>
+                    </div>
+                    <div className="p-4 rounded-lg bg-muted/30 border border-border/50">
+                      <p className="font-semibold text-primary mb-2">Other</p>
+                      <p className="text-sm text-muted-foreground">Responsive Design, RESTful APIs, Agile, Problem Solving</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Projects */}
+                <div className="mb-8">
+                  <h2 className="text-2xl font-bold text-primary mb-4 flex items-center gap-2">
+                    <FileText className="h-6 w-6" /> PROJECTS
+                  </h2>
+                  <div className="space-y-4">
+                    <div className="p-4 rounded-lg bg-muted/30 border border-border/50">
+                      <p className="text-lg font-semibold mb-2">CraneSafeAI - AI-Powered Crane Monitoring Platform</p>
+                      <p className="text-sm text-muted-foreground mb-3">React • Tailwind CSS • Recharts • AI/ML • IoT</p>
+                      <ul className="list-disc list-inside space-y-1 text-sm text-muted-foreground">
+                        <li>Developed AI-powered platform for crane safety monitoring with real-time IoT dashboards</li>
+                        <li>Implemented predictive maintenance algorithms to reduce downtime by 35%</li>
+                        <li>Built comprehensive analytics dashboard with Recharts for impact visualization</li>
+                        <li>Integrated AI comparison tools for enhanced safety protocols</li>
+                      </ul>
+                      <a href="https://cranesafe.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-primary text-sm hover:underline mt-2 inline-block">
+                        🔗 View Live Project
+                      </a>
+                    </div>
+
+                    <div className="p-4 rounded-lg bg-muted/30 border border-border/50">
+                      <p className="text-lg font-semibold mb-2">SS Cleaners - Full-Stack Service Platform</p>
+                      <p className="text-sm text-muted-foreground mb-3">React • Supabase • Razorpay • Edge Functions • Realtime</p>
+                      <ul className="list-disc list-inside space-y-1 text-sm text-muted-foreground">
+                        <li>Built modern cleaning services platform with secure Razorpay payment integration</li>
+                        <li>Implemented real-time chat system using Supabase Realtime for customer support</li>
+                        <li>Developed Admin Dashboard for enquiry tracking and revenue analytics</li>
+                        <li>Optimized database queries and edge functions for 50% faster response times</li>
+                      </ul>
+                      <a href="https://ss-cleaners.vercel.app" target="_blank" rel="noopener noreferrer" className="text-primary text-sm hover:underline mt-2 inline-block">
+                        🔗 View Live Project
+                      </a>
+                    </div>
+
+                    <div className="p-4 rounded-lg bg-muted/30 border border-border/50">
+                      <p className="text-lg font-semibold mb-2">CitySense - Urban Issue Reporting Platform</p>
+                      <p className="text-sm text-muted-foreground mb-3">React • Node.js • Express • Firebase • Leaflet.js</p>
+                      <ul className="list-disc list-inside space-y-1 text-sm text-muted-foreground">
+                        <li>Created full-stack geolocation-based reporting system with Leaflet.js maps</li>
+                        <li>Integrated Firebase authentication and Cloudinary for secure uploads</li>
+                        <li>Built admin dashboard for issue management and resolution tracking</li>
+                        <li>Implemented real-time notifications for issue status updates</li>
+                      </ul>
+                      <a href="https://city-sense-flame.vercel.app" target="_blank" rel="noopener noreferrer" className="text-primary text-sm hover:underline mt-2 inline-block">
+                        🔗 View Live Project
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Achievements */}
+                <div className="mb-8">
+                  <h2 className="text-2xl font-bold text-primary mb-4 flex items-center gap-2">
+                    <Award className="h-6 w-6" /> ACHIEVEMENTS & CERTIFICATIONS
+                  </h2>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div className="p-4 rounded-lg bg-muted/30 border border-border/50">
+                      <p className="font-semibold mb-2">🏆 Hackathons</p>
+                      <ul className="list-disc list-inside space-y-1 text-sm text-muted-foreground">
+                        <li>3rd Place - Hack With Impact 2025</li>
+                        <li>Top 10 - Hack With Tricity 2024</li>
+                      </ul>
+                    </div>
+                    <div className="p-4 rounded-lg bg-muted/30 border border-border/50">
+                      <p className="font-semibold mb-2">⭐ Competitive Programming</p>
+                      <ul className="list-disc list-inside space-y-1 text-sm text-muted-foreground">
+                        <li>CodeChef 3★ Rated (Max: 1657)</li>
+                        <li>Codeforces Pupil</li>
+                        <li>300+ Problems Solved</li>
+                      </ul>
+                    </div>
+                    <div className="p-4 rounded-lg bg-muted/30 border border-border/50">
+                      <p className="font-semibold mb-2">📜 Certifications</p>
+                      <ul className="list-disc list-inside space-y-1 text-sm text-muted-foreground">
+                        <li>META Frontend Developer</li>
+                        <li>META JavaScript Certification</li>
+                        <li>NASA Space Apps Organizer</li>
+                      </ul>
+                    </div>
+                    <div className="p-4 rounded-lg bg-muted/30 border border-border/50">
+                      <p className="font-semibold mb-2">🎯 Leadership</p>
+                      <ul className="list-disc list-inside space-y-1 text-sm text-muted-foreground">
+                        <li>Event Coordinator - 5 Events</li>
+                        <li>200+ Participants Managed</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Download Section */}
+                <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6 border-t border-border/50">
+                  <Button
+                    size="lg"
+                    onClick={handleDownload}
+                    className="glow-button px-8 gap-2"
+                  >
+                    <Download className="h-5 w-5" />
+                    Download PDF Resume
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    onClick={handleViewDrive}
+                    className="px-8 gap-2 border-primary/30 hover:border-primary hover:bg-primary/5"
+                  >
+                    <ExternalLink className="h-4 w-4" />
+                    View on Google Drive
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
     <section id="resume" ref={sectionRef} className="py-16 relative overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_hsl(173_80%_50%_/_0.08)_0%,_transparent_60%)]" />
@@ -214,10 +467,10 @@ export const ResumeSection = () => {
               </div>
 
               {/* Right Side - HTML Resume Preview */}
-              <div className="resume-preview relative">
-                <div className="aspect-[3/4] rounded-2xl border-2 border-primary/30 bg-background relative overflow-hidden group hover:border-primary/50 transition-colors shadow-2xl">
+              <div className="resume-preview relative cursor-pointer" onClick={openModal}>
+                <div className="aspect-[3/4] rounded-2xl border-2 border-primary/30 bg-background relative overflow-hidden group hover:border-primary/50 transition-all duration-300 shadow-2xl hover:shadow-primary/20 hover:scale-[1.02]">
                   {/* Actual HTML Resume Preview */}
-                  <div className="absolute inset-0 overflow-y-auto custom-scrollbar p-6 text-xs">
+                  <div className="absolute inset-0 overflow-y-auto custom-scrollbar p-6 text-xs pointer-events-none">
                     {/* Header Section */}
                     <div className="text-center mb-4 pb-3 border-b-2 border-primary/30">
                       <h1 className="text-lg font-bold gradient-text mb-1">ABHISHEK KUMAR PANDEY</h1>
@@ -230,11 +483,11 @@ export const ResumeSection = () => {
                         <span>📍 Gurugram, India</span>
                       </div>
                       <div className="flex items-center justify-center gap-2 mt-1 text-[9px]">
-                        <a href="https://github.com/pandey-jee" className="text-primary hover:underline">GitHub</a>
+                        <span className="text-primary">GitHub</span>
                         <span>•</span>
-                        <a href="https://linkedin.com/in/abhishek-kumar-pandey" className="text-primary hover:underline">LinkedIn</a>
+                        <span className="text-primary">LinkedIn</span>
                         <span>•</span>
-                        <a href="https://portfolio.com" className="text-primary hover:underline">Portfolio</a>
+                        <span className="text-primary">Portfolio</span>
                       </div>
                     </div>
 
@@ -334,18 +587,14 @@ export const ResumeSection = () => {
                     </div>
                   </div>
 
-                  {/* Floating Badge */}
-                  <div className="absolute -top-3 -right-3 px-4 py-2 rounded-full bg-gradient-to-r from-primary to-secondary text-white text-xs font-bold shadow-lg group-hover:scale-110 transition-transform">
-                    LIVE
-                  </div>
-
-                  {/* Download Icon Overlay on Hover */}
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-background/95 backdrop-blur-sm cursor-pointer" onClick={handleDownload}>
+                  {/* Click to View Overlay */}
+                  <div className="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-background/90">
                     <div className="text-center">
-                      <div className="p-6 rounded-full bg-primary/20 border-2 border-primary animate-bounce mx-auto mb-3">
-                        <Download className="h-10 w-10 text-primary" />
+                      <div className="p-6 rounded-full bg-primary/20 border-2 border-primary mx-auto mb-4 animate-pulse">
+                        <FileText className="h-12 w-12 text-primary" />
                       </div>
-                      <p className="text-sm font-semibold text-primary">Click to Download PDF</p>
+                      <p className="text-lg font-bold gradient-text mb-2">View Full Resume</p>
+                      <p className="text-sm text-muted-foreground">Click to expand</p>
                     </div>
                   </div>
                 </div>
@@ -359,5 +608,6 @@ export const ResumeSection = () => {
         </div>
       </div>
     </section>
+    </>
   );
 };
