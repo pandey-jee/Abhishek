@@ -7,6 +7,7 @@ import { AnimatePresence } from "framer-motion";
 import { CustomCursor } from "@/components/CustomCursor";
 import { PageTransition } from "@/components/PageTransition";
 import { BackgroundAnimation } from "@/components/BackgroundAnimation";
+import { ScrollToTop } from "@/components/ScrollToTop";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 
@@ -33,6 +34,7 @@ const App = () => (
       <Sonner />
       <BackgroundAnimation />
       <CustomCursor />
+      <ScrollToTop />
       <BrowserRouter>
         <AnimatedRoutes />
       </BrowserRouter>

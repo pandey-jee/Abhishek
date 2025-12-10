@@ -64,7 +64,7 @@ export const HeroSection = () => {
   };
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
+    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20 md:pt-0">
       {/* Animated Particles with Parallax */}
       <motion.div 
         className="absolute inset-0 pointer-events-none"

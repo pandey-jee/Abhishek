@@ -61,12 +61,36 @@ const skillCategories = [
 ];
 
 const languages = [
-  { name: 'JavaScript', abbr: 'JS', color: 'from-yellow-400 to-yellow-600' },
-  { name: 'TypeScript', abbr: 'TS', color: 'from-blue-400 to-blue-600' },
-  { name: 'Java', abbr: 'JV', color: 'from-red-400 to-red-600' },
-  { name: 'C++', abbr: 'C+', color: 'from-purple-400 to-purple-600' },
-  { name: 'SQL', abbr: 'SQ', color: 'from-cyan-400 to-cyan-600' },
-  { name: 'HTML/CSS', abbr: 'HC', color: 'from-orange-400 to-pink-600' },
+  { 
+    name: 'JavaScript', 
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg',
+    color: 'from-yellow-400 to-yellow-600' 
+  },
+  { 
+    name: 'TypeScript', 
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg',
+    color: 'from-blue-400 to-blue-600' 
+  },
+  { 
+    name: 'Java', 
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg',
+    color: 'from-red-400 to-red-600' 
+  },
+  { 
+    name: 'C++', 
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg',
+    color: 'from-purple-400 to-purple-600' 
+  },
+  { 
+    name: 'SQL', 
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg',
+    color: 'from-cyan-400 to-cyan-600' 
+  },
+  { 
+    name: 'HTML/CSS', 
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg',
+    color: 'from-orange-400 to-pink-600' 
+  },
 ];
 
 export const SkillsSection = () => {
@@ -159,10 +183,12 @@ export const SkillsSection = () => {
                 whileTap={{ scale: 0.95 }}
                 className="lang-item text-center group cursor-pointer"
               >
-                <div className={`w-16 h-16 md:w-20 md:h-20 rounded-xl bg-gradient-to-br ${lang.color} flex items-center justify-center mb-2 group-hover:scale-110 transition-all duration-300 shadow-lg group-hover:shadow-xl relative overflow-hidden`}>
-                  <span className="font-mono text-lg md:text-xl font-bold text-white relative z-10">
-                    {lang.abbr}
-                  </span>
+                <div className={`w-16 h-16 md:w-20 md:h-20 rounded-xl bg-gradient-to-br ${lang.color} flex items-center justify-center mb-2 group-hover:scale-110 transition-all duration-300 shadow-lg group-hover:shadow-xl relative overflow-hidden p-3`}>
+                  <img 
+                    src={lang.logo} 
+                    alt={lang.name}
+                    className="w-full h-full object-contain relative z-10"
+                  />
                   {/* Shine effect */}
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
                 </div>
